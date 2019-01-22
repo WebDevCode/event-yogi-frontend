@@ -1,0 +1,27 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css?family=Merriweather:400,700,700i|Open+Sans:300,400,400i");
+// Set your brand colors
+$primary-Color: #e84d3d;
+$primary-Light: #ff8069;
+$primary-Dark: #af0e14;
+
+$secondary-Color: #2d3e80;
+$secondary-Light: #5e68b0;
+$secondary-Dark: #001953;
+$border-shade: #e1e3df;
+
+$dark: #222222;
+$is-dark: $dark;
+
+// Update Bulma's global variables
+$family-sans-serif: "Open Sans", BlinkMacSystemFont, -apple-system, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+  "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-serif: Merriweather, serif;
+$primary: $primary-Color;
+
+//Derived Variables
+$family-primary: $family-sans-serif;
+$family-secondary: $family-serif;
+
+@import "~bulma/bulma.sass";
