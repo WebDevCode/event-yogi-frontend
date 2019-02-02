@@ -290,7 +290,7 @@ nav.navbar .container {
 
     &.active {
       visibility: visible;
-      opacitiy: 1;
+      opacity: 1;
       .container {
         animation: slideUp 0.2s ease-in;
       }

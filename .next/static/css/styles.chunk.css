@@ -6968,7 +6968,7 @@ nav.navbar .container {
       display: block; }
       .mobile-menu.active {
         visibility: visible;
-        opacitiy: 1; }
+        opacity: 1; }
         .mobile-menu.active .container {
           animation: slideUp 0.2s ease-in; }
       .mobile-menu.inactive {
