@@ -93,9 +93,9 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./pages/index.js":
+/***/ "./pages/order.js":
 /*!************************!*\
-  !*** ./pages/index.js ***!
+  !*** ./pages/order.js ***!
   \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -104,10 +104,10 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "C:\\Users\\u0144362\\Desktop\\event-yogi\\frontend\\pages\\index.js";
+var _jsxFileName = "C:\\Users\\u0144362\\Desktop\\event-yogi\\frontend\\pages\\order.js";
 
 
-var Home = function Home(props) {
+var Order = function Order(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container",
     __source: {
@@ -115,21 +115,21 @@ var Home = function Home(props) {
       lineNumber: 1
     },
     __self: this
-  }, "Home Page");
+  }, "order Page");
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+/* harmony default export */ __webpack_exports__["default"] = (Order);
 
 /***/ }),
 
 /***/ 3:
 /*!******************************!*\
-  !*** multi ./pages/index.js ***!
+  !*** multi ./pages/order.js ***!
   \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./pages/index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! ./pages/order.js */"./pages/order.js");
 
 
 /***/ }),
@@ -146,4 +146,4 @@ module.exports = require("react");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=order.js.map

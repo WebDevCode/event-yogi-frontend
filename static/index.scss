@@ -272,131 +272,111 @@ nav.navbar .container {
 
 //Mobile Menu
 
-.mobile-menu {
+.mobile-menu-wrapper {
   position: fixed;
-  display: none;
-  bottom: 0;
-  left: 0;
-  right: 0;
   top: 0;
-  z-index: 100;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background: rgba(0, 0, 0, 0.5);
-  padding-top: 75px;
-  font-size: 1rem;
-  transition: visibility 0.1s ease-out;
-
-  @media screen and (max-width: 768px) {
-    display: block;
-
+  z-index: 100;
+  display: block;
+  transition: visibility 0.2s ease;
+  &.active {
+    visibility: visible;
+  }
+  &.inactive {
+    visibility: hidden;
+  }
+  @media screen and (min-width: 769px) {
     &.active {
-      visibility: visible;
-      opacitiy: 1;
-      .container {
-        animation: slideUp 0.2s ease-in;
-      }
-    }
-
-    &.inactive {
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.1s ease, opacity 0.1s linear;
-      .container {
-        animation: slideDown 0.2s linear;
-      }
+      display: none;
     }
   }
+}
+.mobile-menu {
+  display: block;
+  background: #fbfbfa;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 60px;
+  width: 100%;
+  height: 100%;
 
-  .container {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 10px;
-    background-color: #fbfbfa;
-    height: 100%;
+  &.active {
+    visibility: visible;
 
-    .mobile-menu-header {
-      border-bottom: 1px solid $border-shade;
-      margin-bottom: 0;
-      position: relative;
-      height: 50px;
-      background: #fff;
+    &.slideUp {
+      animation: slideUp 0.3s ease;
+      animation-fill-mode: forwards;
     }
   }
 
-  .level-right,
-  .level-left {
-    width: 50px;
-    margin-bottom: -1px;
+  &.inactive {
+    transition: visibility 0.2s ease;
+    visibility: hidden;
+    &.slideDown {
+      animation: slideDown 0.2s ease;
+      animation-fill-mode: both;
+    }
   }
 
-  .level-left {
-    border-right: 1px solid $border-shade;
-  }
-
-  .level-right {
-    border-left: 1px solid $border-shade;
-  }
-
-  button {
-    display: block;
-    padding: 12px 0 10px;
-    margin: 0;
-    background: none;
-    cursor: pointer;
-    border: none;
-    box-sizing: inherit;
-    outline: none;
-  }
-
-  .container ul {
-    display: none;
-    width: 100%;
+  .mobile-menu-header {
+    height: 50px;
     background: #fff;
+    margin-bottom: 0;
 
-    &.primary {
-      display: block;
-      animation: slideFromRight 0.2s ease-in;
+    .level-left,
+    .level-right {
+      height: 100%;
+      cursor: pointer;
+      .level-item {
+        width: 50px;
+        height: 100%;
+      }
     }
-
-    &.level2Menu {
-      display: block;
-      position: absolute;
-      animation: slideFromLeft 0.2s ease-in;
+    .level-left {
+      border-right: 1px solid $border-shade;
     }
-
-    &.level3Menu {
-      display: block;
-      position: absolute;
-      animation: slideFromLeft 0.2s ease-in;
+    .level-right {
+      border-left: 1px solid $border-shade;
+    }
+    .level-item {
+      p {
+        font-size: 14px;
+        text-align: center;
+      }
     }
   }
 
-  ul li.level-item {
-    margin: 0;
-    border-bottom: 1px solid $border-shade;
+  .mobile-nav {
+    background: #fff;
+    border-top: 1px solid $border-shade;
+
+    .level {
+      height: 40px;
+      margin-bottom: 0;
+      border-bottom: 1px solid $border-shade;
+      .level-right,
+      .level-left {
+        height: 100%;
+        .level-item {
+          height: 100%;
+          cursor: pointer;
+        }
+      }
+      .level-right {
+        width: 50px;
+      }
+      .level-left {
+        padding-left: 10px;
+      }
+    }
   }
 
-  ul li a {
-    display: inline-block;
-    padding: 10px 0;
-    padding-left: 15px;
-    text-align: left;
-    text-decoration: none;
-    color: #222;
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-  }
-
-  ul li button {
-    width: 50px;
-    padding: 9px;
-    height: 100%;
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
+  @media screen and (min-width: 769px) {
+    display: none;
   }
 }
 
@@ -415,24 +395,5 @@ nav.navbar .container {
   }
   100% {
     transform: translate(0, 100%);
-    display: none;
-  }
-}
-
-@keyframes slideFromLeft {
-  0% {
-    transform: translate(100%, 0);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes slideFromRight {
-  0% {
-    transform: translate(-100%, 0);
-  }
-  100% {
-    transform: translate(0, 0);
   }
 }

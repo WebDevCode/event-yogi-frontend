@@ -28,7 +28,7 @@ class Page extends React.Component {
         />
         <MobileMenu
           isOpen={this.state.isMenuOpen}
-          menuClick={this.handleMenuClick}
+          handleMenuClick={this.handleMenuClick}
         />
         <Navbar />
         {this.props.children}

@@ -627,8 +627,6 @@ var _jsxFileName = "C:\\Users\\u0144362\\Desktop\\event-yogi\\frontend\\componen
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -668,78 +666,26 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MobileMenu)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      menu: {
-        menuTitle: "Browse Categories",
-        prevTitle: "",
-        menuTree: [{
-          name: "Home",
-          url: "/"
+      menu: [{
+        name: "Home",
+        url: "/order"
+      }, {
+        name: "Order",
+        url: "/orders",
+        hasSubMenu: true,
+        subMenu: [{
+          name: "Status",
+          url: "/status"
         }, {
-          name: "Register",
-          url: "/register",
-          hasSubMenu: true,
-          subMenu: [{
-            name: "Another Route",
-            url: "/another"
-          }]
-        }, {
-          name: "User",
-          url: "/user",
-          hasSubMenu: true,
-          subMenu: [{
-            name: "Orders",
-            url: "/orders",
-            hasSubMenu: true,
-            subMenu: [{
-              name: "Track",
-              url: "/track"
-            }, {
-              name: "Account",
-              url: "/account"
-            }]
-          }, {
-            name: "Logout",
-            url: "/logout"
-          }]
+          name: "Cart",
+          url: "/cart"
         }]
-      },
-      activeSubMenu: [],
-      previousMenu: []
+      }]
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleContainerClick", function (e) {
       e.preventDefault();
       e.stopPropagation();
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleBackClick", function (e) {
-      e.preventDefault();
-
-      _this.setState(_objectSpread({}, _this.state, {
-        activeSubMenu: _this.state.previousMenu,
-        previousMenu: [],
-        menu: _objectSpread({}, _this.state.menu, {
-          menuTitle: _this.state.menu.prevTitle,
-          prevTitle: "Browse Categories"
-        })
-      }));
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "menuItemSubClick", function (name, subMenu) {
-      return function (e) {
-        e.preventDefault();
-
-        _this.setState(_objectSpread({}, _this.state, {
-          previousMenu: _this.state.activeSubMenu,
-          activeSubMenu: subMenu,
-          menu: _objectSpread({}, _this.state.menu, {
-            prevTitle: _this.state.menu.menuTitle,
-            menuTitle: name
-          })
-        }));
-
-        e.stopPropagation();
-      };
     });
 
     return _this;
@@ -749,95 +695,89 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "mobile-menu ".concat(this.props.isOpen ? "active" : "inactive"),
-        onClick: this.props.menuClick,
+        className: "mobile-menu-wrapper ".concat(this.props.isOpen ? "active" : "inactive"),
+        onClick: this.props.handleMenuClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 35
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container",
+        className: "mobile-menu ".concat(this.props.isOpen ? "active slideUp" : "inactive slideDown"),
         onClick: this.handleContainerClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 91
+          lineNumber: 41
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "level is-mobile mobile-menu-header",
+        className: "mobile-menu-header level is-mobile",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 92
+          lineNumber: 47
         },
         __self: this
-      }, this.state.previousMenu.length > 0 || this.state.activeSubMenu.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "level-left",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 48
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "level-item",
-        onClick: this.handleBackClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 96
+          lineNumber: 49
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "material-icons",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 97
+          lineNumber: 50
         },
         __self: this
-      }, "chevron_left"))) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "chevron_left"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "level-item",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 101
+          lineNumber: 53
         },
         __self: this
-      }, this.state.menu.menuTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 54
+        },
+        __self: this
+      }, "Browse Categories")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "level-right",
+        onClick: this.props.handleMenuClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 102
+          lineNumber: 56
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "level-item",
-        onClick: this.props.menuClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 103
+          lineNumber: 57
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "material-icons",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 104
+          lineNumber: 58
         },
         __self: this
-      }, "close")))), this.state.activeSubMenu.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ParentMenu__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        show: this.state.previousMenu.length > 0 ? "level3Menu" : "level2Menu",
-        menu: this.state.activeSubMenu,
-        menuItemSubClick: this.menuItemSubClick,
+      }, "close")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ParentMenu__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        menu: this.state.menu,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 110
-        },
-        __self: this
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ParentMenu__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        show: "primary",
-        menu: this.state.menu.menuTree,
-        menuItemSubClick: this.menuItemSubClick,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 118
+          lineNumber: 62
         },
         __self: this
       })));
@@ -1158,7 +1098,7 @@ function (_React$Component) {
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileMenu__WEBPACK_IMPORTED_MODULE_4__["default"], {
         isOpen: this.state.isMenuOpen,
-        menuClick: this.handleMenuClick,
+        handleMenuClick: this.handleMenuClick,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 29
@@ -1194,39 +1134,86 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _MenuLinkWithSub__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MenuLinkWithSub */ "./components/MenuLinkWithSub.js");
 /* harmony import */ var _MenuLink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MenuLink */ "./components/MenuLink.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
 var _jsxFileName = "C:\\Users\\u0144362\\Desktop\\event-yogi\\frontend\\components\\ParentMenu.js";
 
 
 
 
+
 var ParentMenu = function ParentMenu(props) {
-  var menu = props.menu,
-      menuItemSubClick = props.menuItemSubClick,
-      show = props.show;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "level ".concat(show || "primary"),
+  var menu = props.menu;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mobile-nav",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 9
     },
     __self: this
   }, menu.map(function (menuItem) {
-    return menuItem.hasOwnProperty("hasSubMenu") ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuLinkWithSub__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      menu: menuItem,
-      menuItemSubClick: menuItemSubClick,
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "level is-mobile",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 11
       },
       __self: this
-    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuLink__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      menu: menuItem,
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "level-left",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "level-item",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13
+      },
+      __self: this
+    }, menuItem.hasOwnProperty("hasSubMenu") && menuItem.hasSubMenu == true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 16
       },
       __self: this
-    });
+    }, menuItem.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      href: menuItem.url,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19
+      },
+      __self: this
+    }, menuItem.name)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "level-right",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 24
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "level-item",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "material-icons",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 26
+      },
+      __self: this
+    }, "chevron_right"))));
   }));
 };
 
