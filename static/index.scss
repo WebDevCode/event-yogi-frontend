@@ -350,9 +350,26 @@ nav.navbar .container {
     }
   }
 
-  .mobile-nav {
+  .mobile-nav,
+  .mobile-nav-second,
+  .mobile-nav-third {
     background: #fff;
     border-top: 1px solid $border-shade;
+
+    &.slideFromLeft {
+      animation: slideFromLeft 0.2s ease;
+    }
+    &.slideFromLeft2 {
+      animation: slideFromLeft2 0.2s ease;
+    }
+    &.slideFromRight {
+      animation: slideFromRight 0.2s ease;
+      animation-fill-mode: none;
+    }
+    &.slideFromRight2 {
+      animation: slideFromRight2 0.2s ease;
+      animation-fill-mode: nonne;
+    }
 
     .level {
       height: 40px;
@@ -369,8 +386,23 @@ nav.navbar .container {
       .level-right {
         width: 50px;
       }
-      .level-left {
+      .level-item {
         padding-left: 10px;
+        justify-content: left;
+        height: 100%;
+        a {
+          text-decoration: none;
+          height: 100%;
+          width: 100%;
+          display: block;
+          padding-top: 6px;
+          color: black;
+        }
+        p {
+          cursor: pointer;
+          width: 100%;
+          display: block;
+        }
       }
     }
   }
@@ -395,5 +427,38 @@ nav.navbar .container {
   }
   100% {
     transform: translate(0, 100%);
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translate(-100%, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes slideFromLeft2 {
+  0% {
+    transform: translate(-100%, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes slideFromRight {
+  0% {
+    transform: translate(100%, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes slideFromRight2 {
+  0% {
+    transform: translate(100%, 0);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }

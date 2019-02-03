@@ -1,28 +1,73 @@
-import ParentMenu from "./ParentMenu";
+import MobileParentMenu from "./MobileParentMenu";
+import Menu from "./testmenu";
 
 class MobileMenu extends React.Component {
   state = {
-    menu: [
-      {
-        name: "Home",
-        url: "/order"
-      },
-      {
-        name: "Order",
-        url: "/orders",
-        hasSubMenu: true,
-        subMenu: [
-          {
-            name: "Status",
-            url: "/status"
-          },
-          {
-            name: "Cart",
-            url: "/cart"
-          }
-        ]
-      }
-    ]
+    menu: [],
+    currentMenu: [],
+    prevMenu: [],
+    isTopLevel: true,
+    isSecondLevel: false,
+    isThirdLevel: false,
+    animatedClass: ""
+  };
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      menu: Menu,
+      currentMenu: Menu
+    });
+  }
+
+  handleBackClick = e => {
+    e.preventDefault();
+    if (this.state.isSecondLevel) {
+      this.setState({
+        ...this.state,
+        currentMenu: this.state.prevMenu,
+        prevMenu: [],
+        isTopLevel: !this.state.isTopLevel,
+        isSecondLevel: !this.state.isSecondLevel,
+        animatedClass: "slideFromLeft"
+      });
+    } else if (this.state.isThirdLevel) {
+      this.setState({
+        ...this.state,
+        currentMenu: this.state.prevMenu,
+        prevMenu: this.state.menu,
+        isSecondLevel: !this.state.isSecondLevel,
+        isThirdLevel: !this.state.isThirdLevel,
+        animatedClass: "slideFromLeft2"
+      });
+    }
+
+    e.stopPropagation();
+  };
+
+  handleSubMenuClick = item => e => {
+    e.preventDefault();
+    if (this.state.isSecondLevel) {
+      this.setState({
+        ...this.state,
+        prevMenu: this.state.currentMenu,
+        currentMenu: item.subMenu,
+        isTopLevel: false,
+        isSecondLevel: !this.state.isSecondLevel,
+        isThirdLevel: !this.state.isThirdLevel,
+        animatedClass: "slideFromRight2"
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        currentMenu: item.subMenu,
+        prevMenu: this.state.menu,
+        isTopLevel: !this.state.isTopLevel,
+        isSecondLevel: !this.state.isSecondLevel,
+        animatedClass: "slideFromRight"
+      });
+    }
+    e.stopPropagation();
   };
 
   handleContainerClick = e => {
@@ -42,15 +87,14 @@ class MobileMenu extends React.Component {
           className={`mobile-menu ${
             this.props.isOpen ? "active slideUp" : "inactive slideDown"
           }`}
-          onClick={this.handleContainerClick}
         >
           <div className="mobile-menu-header level is-mobile">
             <div className="level-left">
-              <div className="level-item">
+              <div className="level-item" onClick={this.handleBackClick}>
                 <i className="material-icons">chevron_left</i>
               </div>
             </div>
-            <div className="level-item">
+            <div className="level-item" onClick={this.handleContainerClick}>
               <p>Browse Categories</p>
             </div>
             <div className="level-right" onClick={this.props.handleMenuClick}>
@@ -59,7 +103,11 @@ class MobileMenu extends React.Component {
               </div>
             </div>
           </div>
-          <ParentMenu menu={this.state.menu} />
+          <MobileParentMenu
+            menu={this.state.currentMenu}
+            handleSubMenuClick={this.handleSubMenuClick}
+            animated={this.state.animatedClass}
+          />
         </div>
       </div>
     );
