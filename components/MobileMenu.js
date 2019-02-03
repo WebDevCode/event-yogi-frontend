@@ -1,51 +1,73 @@
-import ParentMenu from "./ParentMenu";
+import MobileParentMenu from "./MobileParentMenu";
+import Menu from "./testmenu";
 
 class MobileMenu extends React.Component {
   state = {
-    menu: {
-      menuTitle: "Browse Categories",
-      prevTitle: "",
-      menuTree: [
-        {
-          name: "Home",
-          url: "/"
-        },
-        {
-          name: "Register",
-          url: "/register",
-          hasSubMenu: true,
-          subMenu: [{ name: "Another Route", url: "/another" }]
-        },
-        {
-          name: "User",
-          url: "/user",
-          hasSubMenu: true,
-          subMenu: [
-            {
-              name: "Orders",
-              url: "/orders",
-              hasSubMenu: true,
-              subMenu: [
-                {
-                  name: "Track",
-                  url: "/track"
-                },
-                {
-                  name: "Account",
-                  url: "/account"
-                }
-              ]
-            },
-            {
-              name: "Logout",
-              url: "/logout"
-            }
-          ]
-        }
-      ]
-    },
-    activeSubMenu: [],
-    previousMenu: []
+    menu: [],
+    currentMenu: [],
+    prevMenu: [],
+    isTopLevel: true,
+    isSecondLevel: false,
+    isThirdLevel: false,
+    animatedClass: ""
+  };
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      menu: Menu,
+      currentMenu: Menu
+    });
+  }
+
+  handleBackClick = e => {
+    e.preventDefault();
+    if (this.state.isSecondLevel) {
+      this.setState({
+        ...this.state,
+        currentMenu: this.state.prevMenu,
+        prevMenu: [],
+        isTopLevel: !this.state.isTopLevel,
+        isSecondLevel: !this.state.isSecondLevel,
+        animatedClass: "slideFromLeft"
+      });
+    } else if (this.state.isThirdLevel) {
+      this.setState({
+        ...this.state,
+        currentMenu: this.state.prevMenu,
+        prevMenu: this.state.menu,
+        isSecondLevel: !this.state.isSecondLevel,
+        isThirdLevel: !this.state.isThirdLevel,
+        animatedClass: "slideFromLeft2"
+      });
+    }
+
+    e.stopPropagation();
+  };
+
+  handleSubMenuClick = item => e => {
+    e.preventDefault();
+    if (this.state.isSecondLevel) {
+      this.setState({
+        ...this.state,
+        prevMenu: this.state.currentMenu,
+        currentMenu: item.subMenu,
+        isTopLevel: false,
+        isSecondLevel: !this.state.isSecondLevel,
+        isThirdLevel: !this.state.isThirdLevel,
+        animatedClass: "slideFromRight2"
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        currentMenu: item.subMenu,
+        prevMenu: this.state.menu,
+        isTopLevel: !this.state.isTopLevel,
+        isSecondLevel: !this.state.isSecondLevel,
+        animatedClass: "slideFromRight"
+      });
+    }
+    e.stopPropagation();
   };
 
   handleContainerClick = e => {
@@ -53,74 +75,39 @@ class MobileMenu extends React.Component {
     e.stopPropagation();
   };
 
-  handleBackClick = e => {
-    e.preventDefault();
-    this.setState({
-      ...this.state,
-      activeSubMenu: this.state.previousMenu,
-      previousMenu: [],
-      menu: {
-        ...this.state.menu,
-        menuTitle: this.state.menu.prevTitle,
-        prevTitle: "Browse Categories"
-      }
-    });
-  };
-
-  menuItemSubClick = (name, subMenu) => e => {
-    e.preventDefault();
-    this.setState({
-      ...this.state,
-      previousMenu: this.state.activeSubMenu,
-      activeSubMenu: subMenu,
-      menu: {
-        ...this.state.menu,
-        prevTitle: this.state.menu.menuTitle,
-        menuTitle: name
-      }
-    });
-    e.stopPropagation();
-  };
-
   render() {
     return (
       <div
-        className={`mobile-menu ${this.props.isOpen ? "active" : "inactive"}`}
-        onClick={this.props.menuClick}
+        className={`mobile-menu-wrapper ${
+          this.props.isOpen ? "active" : "inactive"
+        }`}
+        onClick={this.props.handleMenuClick}
       >
-        <div className="container" onClick={this.handleContainerClick}>
-          <div className="level is-mobile mobile-menu-header">
-            {this.state.previousMenu.length > 0 ||
-            this.state.activeSubMenu.length > 0 ? (
-              <div className="level-left">
-                <button className="level-item" onClick={this.handleBackClick}>
-                  <i className="material-icons">chevron_left</i>
-                </button>
+        <div
+          className={`mobile-menu ${
+            this.props.isOpen ? "active slideUp" : "inactive slideDown"
+          }`}
+        >
+          <div className="mobile-menu-header level is-mobile">
+            <div className="level-left">
+              <div className="level-item" onClick={this.handleBackClick}>
+                <i className="material-icons">chevron_left</i>
               </div>
-            ) : null}
-            <div className="level-item">{this.state.menu.menuTitle}</div>
-            <div className="level-right">
-              <button className="level-item" onClick={this.props.menuClick}>
+            </div>
+            <div className="level-item" onClick={this.handleContainerClick}>
+              <p>Browse Categories</p>
+            </div>
+            <div className="level-right" onClick={this.props.handleMenuClick}>
+              <div className="level-item">
                 <i className="material-icons">close</i>
-              </button>
+              </div>
             </div>
           </div>
-
-          {this.state.activeSubMenu.length > 0 ? (
-            <ParentMenu
-              show={
-                this.state.previousMenu.length > 0 ? "level3Menu" : "level2Menu"
-              }
-              menu={this.state.activeSubMenu}
-              menuItemSubClick={this.menuItemSubClick}
-            />
-          ) : (
-            <ParentMenu
-              show="primary"
-              menu={this.state.menu.menuTree}
-              menuItemSubClick={this.menuItemSubClick}
-            />
-          )}
+          <MobileParentMenu
+            menu={this.state.currentMenu}
+            handleSubMenuClick={this.handleSubMenuClick}
+            animated={this.state.animatedClass}
+          />
         </div>
       </div>
     );
