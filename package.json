@@ -1,7 +1,7 @@
 {
-  "name": "sick-fits-frontend",
+  "name": "event-yogi",
   "version": "1.0.0",
-  "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
+  "description": "Event Yogi! | An ecommerce marketplace built with React, GraphQL, Next and Apollo",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 7777",
