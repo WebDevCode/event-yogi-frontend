@@ -10,7 +10,11 @@ const ParentMenu = props => {
           <li
             className="level is-mobile"
             key={menuItem.id}
-            onClick={handleSubMenuClick(menuItem)}
+            onClick={handleSubMenuClick(menuItem, {
+              name: `View All ${menuItem.name}`,
+              url: menuItem.url,
+              id: menuItem.id
+            })}
           >
             <div className="level-item">
               <p>{menuItem.name}</p>

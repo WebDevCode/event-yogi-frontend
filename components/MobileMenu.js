@@ -45,13 +45,16 @@ class MobileMenu extends React.Component {
     e.stopPropagation();
   };
 
-  handleSubMenuClick = item => e => {
+  handleSubMenuClick = (item, cat) => e => {
+    let topCat = { name: cat.name, url: cat.url, id: cat.id };
+    let menuNow = [topCat, ...item.subMenu];
+
     e.preventDefault();
     if (this.state.isSecondLevel) {
       this.setState({
         ...this.state,
         prevMenu: this.state.currentMenu,
-        currentMenu: item.subMenu,
+        currentMenu: menuNow,
         isTopLevel: false,
         isSecondLevel: !this.state.isSecondLevel,
         isThirdLevel: !this.state.isThirdLevel,
@@ -60,7 +63,7 @@ class MobileMenu extends React.Component {
     } else {
       this.setState({
         ...this.state,
-        currentMenu: item.subMenu,
+        currentMenu: menuNow,
         prevMenu: this.state.menu,
         isTopLevel: !this.state.isTopLevel,
         isSecondLevel: !this.state.isSecondLevel,
