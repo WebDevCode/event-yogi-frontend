@@ -4,6 +4,20 @@ import HomeSearch from "./HomeSearch";
 import HomeSearchResult from "./HomeSearchResult";
 import MenuRight from "./MenuRight";
 import MobileMenuIcon from "./MobileMenuIcon";
+import Router from "next/router";
+import NProgress from "nprogress";
+
+NProgress.configure({ showSpinner: false });
+
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 const Header = props => (
   <header>
